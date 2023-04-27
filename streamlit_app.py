@@ -10,3 +10,5 @@ streamlit.header('OR')
 streamlit.text('- 🥑Avocado, Cooked Tomato, olive oil and chorizo bagels')
 streamlit.header('OR')
 streamlit.text('-🍞🐔🥗Omlette with veg and toast')
+
+streamlit.header('🍌🥭 Build Your Own Fruit Smoothie 🥝🍇')
