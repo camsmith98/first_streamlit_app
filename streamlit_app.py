@@ -24,10 +24,11 @@ fruits_to_show = my_fruit_list.loc[fruits_selected]
 
 streamlit.dataframe(fruits_to_show)
 
+#Fruityvice advice
+
 import requests 
 
-fruityvice_response = requests.get('https://www.fruityvice.com/api/fruit/raspberry')
-streamlit.text(fruityvice_response.json())
+fruityvice_response = requests.get('https://www.fruityvice.com/api/fruit/'+'kiwi')
 
 fruity_normal = pd.json_normalize(fruityvice_response.json())
 streamlit.dataframe(fruity_normal)
