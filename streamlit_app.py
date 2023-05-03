@@ -31,7 +31,7 @@ streamlit.write('The user has entered',fruit_choice)
 
 import requests 
 
-fruityvice_response = requests.get('https://www.fruityvice.com/api/fruit/'+'fruit_choice')
+fruityvice_response = requests.get("https://www.fruityvice.com/api/fruit/"+ fruit_choice)
 
 fruity_normal = pd.json_normalize(fruityvice_response.json())
 streamlit.dataframe(fruity_normal)
