@@ -27,4 +27,4 @@ streamlit.dataframe(fruits_to_show)
 import requests 
 
 fruityvice_response = requests.get('https://www.fruityvice.com/api/fruit/raspberry')
-streamlit.text(fruityvice_response)
+streamlit.text(fruityvice_response.json())
