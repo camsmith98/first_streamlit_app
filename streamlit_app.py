@@ -45,13 +45,25 @@ except URLError as e:
       
       
 streamlit.write('The user has entered',fruit_choice)
+----------------------------------------------------------------
+
+def get_fruityvice_data(this_fruit_choice):
+    ruityvice_response = requests.get("https://www.fruityvice.com/api/fruit/"+ this_fruit_choice)
+    fruity_normal = pd.json_normalize(fruityvice_response.json())
+    return fruity_nromal
+    
+streamlit.header('Fruityvice advice')
+
+try:
+   fruit_choice = streamlit.text_input('What fruit would you like info about?')
+   if not fruit_choice:
+         streamlit.error('plesae select a fruit to get information')
+   else:
+        back_from_function = get_fruityvice_data(fruit_choice)
+        streamlit.dataframe(back_from_function)
 
 
-
-
-
-
-
+---------------------------------------------------------------------
 #dont run anything past here while we troubleshoot
 streamlit.stop()
 
