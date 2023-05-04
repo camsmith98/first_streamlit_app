@@ -28,17 +28,29 @@ fruits_to_show = my_fruit_list.loc[fruits_selected]
 
 streamlit.dataframe(fruits_to_show)
 
+#new section for fruityvice 
+
 streamlit.header('Fruityvice advice')
 
-fruit_choice = streamlit.text_input('What fruit would you like info about?','kiwi')
+try:
+   fruit_choice = streamlit.text_input('What fruit would you like info about?','kiwi')
+   if not fruit_choice:
+         streamlit.error('plesae select a fruit to get information')
+   else:
+       fruityvice_response = requests.get("https://www.fruityvice.com/api/fruit/"+ fruit_choice)
+       fruity_normal = pd.json_normalize(fruityvice_response.json())
+       streamlit.dataframe(fruity_normal)
+except URLError as e:
+      streamlit.error()
+      
+      
 streamlit.write('The user has entered',fruit_choice)
 
 
 
-fruityvice_response = requests.get("https://www.fruityvice.com/api/fruit/"+ fruit_choice)
 
-fruity_normal = pd.json_normalize(fruityvice_response.json())
-streamlit.dataframe(fruity_normal)
+
+
 
 #dont run anything past here while we troubleshoot
 streamlit.stop()
