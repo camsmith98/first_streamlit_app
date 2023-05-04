@@ -45,7 +45,7 @@ except URLError as e:
       
       
 streamlit.write('The user has entered',fruit_choice)
-----------------------------------------------------------------
+##########################################################
 
 def get_fruityvice_data(this_fruit_choice):
     ruityvice_response = requests.get("https://www.fruityvice.com/api/fruit/"+ this_fruit_choice)
@@ -63,7 +63,7 @@ try:
         streamlit.dataframe(back_from_function)
 
 
----------------------------------------------------------------------
+######################################################
 #dont run anything past here while we troubleshoot
 streamlit.stop()
 
