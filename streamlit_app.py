@@ -46,8 +46,7 @@ try:
    else:
         back_from_function = get_fruityvice_data(fruit_choice)
         streamlit.dataframe(back_from_function)
-
-
+        
 
 streamlit.header("The fruit list contains:")
 #snowflake functions
