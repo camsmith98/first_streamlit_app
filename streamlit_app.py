@@ -32,15 +32,11 @@ streamlit.dataframe(fruits_to_show)
 
 streamlit.header('Fruityvice advice')
 
-
-##########################################################
-
 def get_fruityvice_data(this_fruit_choice):
     ruityvice_response = requests.get("https://www.fruityvice.com/api/fruit/"+ this_fruit_choice)
     fruity_normal = pd.json_normalize(fruityvice_response.json())
     return fruity_nromal
     
-streamlit.header('Fruityvice advice')
 
 try:
    fruit_choice = streamlit.text_input('What fruit would you like info about?')
@@ -50,9 +46,6 @@ try:
         back_from_function = get_fruityvice_data(fruit_choice)
         streamlit.dataframe(back_from_function)
 
-
-
-###############################################################################################
 
 def insert_row_snowflake(new_fruit):
    with my_cnx.cursor() as my_cur:
@@ -64,7 +57,6 @@ if streamlit.button('add a fruit to the list'):
    back_from_function = insert_row_snowflake(add_my_fruit)
    streamlit.text(back_from_function)
 
-################################################################################################
 streamlit.header("The fruit list contains:")
 #snowflake functions
 
