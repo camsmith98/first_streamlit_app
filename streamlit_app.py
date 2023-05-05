@@ -30,15 +30,14 @@ streamlit.dataframe(fruits_to_show)
 
 #new section for fruityvice 
 
-streamlit.header('Fruityvice advice')
-
-streamlit.stop()
-
 def get_fruityvice_data(this_fruit_choice):
-    ruityvice_response = requests.get("https://www.fruityvice.com/api/fruit/"+ this_fruit_choice)
+    fruityvice_response = requests.get("https://www.fruityvice.com/api/fruit/"+ this_fruit_choice)
     fruity_normal = pd.json_normalize(fruityvice_response.json())
-    return fruity_nromal
-    
+    return fruity_normal
+
+#new section displays fruitvice api   
+
+streamlit.header('Fruityvice advice')
 
 try:
    fruit_choice = streamlit.text_input('What fruit would you like info about?')
@@ -49,15 +48,6 @@ try:
         streamlit.dataframe(back_from_function)
 
 
-def insert_row_snowflake(new_fruit):
-   with my_cnx.cursor() as my_cur:
-      my_cur.execute("INSERT INTO PC_RIVERY_DB.PUBLIC.FRUIT_LOAD_LIST VALUES ('from streamlit')")
-      return "thanks for adding " + new_fruit
-add_my_fruit = streamlit.text_input('What fruit would you like to add?')
-if streamlit.button('add a fruit to the list'):
-   my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
-   back_from_function = insert_row_snowflake(add_my_fruit)
-   streamlit.text(back_from_function)
 
 streamlit.header("The fruit list contains:")
 #snowflake functions
@@ -72,6 +62,18 @@ def get_fruit_load_list():
       my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
       my_data_rows = get_fruit_load_list()
       streamlit.dataframe(my_data_rows)
+    
+ 
+def insert_row_snowflake(new_fruit):
+   with my_cnx.cursor() as my_cur:
+      my_cur.execute("INSERT INTO PC_RIVERY_DB.PUBLIC.FRUIT_LOAD_LIST VALUES ('from streamlit')")
+      return "thanks for adding " + new_fruit
+
+add_my_fruit = streamlit.text_input('What fruit would you like to add?')
+if streamlit.button('add a fruit to the list'):
+   my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
+   back_from_function = insert_row_snowflake(add_my_fruit)
+   streamlit.text(back_from_function)
 
 
 
